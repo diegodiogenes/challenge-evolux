@@ -1,0 +1,30 @@
+version: '3.8'
+
+volumes:
+  db_volume:
+
+services:
+  database:
+    container_name: postgres
+    image: postgres:12.0-alpine
+    ports:
+    - 5432:5432/tcp
+    volumes:
+    - db_volume:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: 'evolux-dev'
+      POSTGRES_USER: 'evolux'
+      POSTGRES_PASSWORD: 'mudar@123'
+  app:
+    restart: 'always'
+    container_name: evolux-api
+    build: .
+    environment:
+      DATABASE_URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@database:5432/$POSTGRES_DB
+    volumes:
+    - ./app:/www/app
+    command: python app.py
+    ports:
+    - '8000:8000'
+    depends_on:
+      - database
