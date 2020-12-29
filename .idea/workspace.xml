@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba288974-a515-473e-bdf6-592f53e473e2" name="Default Changelist" comment="" />
+    <list default="true" id="ba288974-a515-473e-bdf6-592f53e473e2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/currency/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/currency/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/currency/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/currency/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/load.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/phone/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/phone/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/phone/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/users/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/users/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/users/serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_phone.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,10 +32,14 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
   </component>
   <component name="ProjectId" id="1mCLjjdmPM22EfGA43fdKg3cBdy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -26,10 +48,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../atados/gpa-ovp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -39,11 +62,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608992762788</updated>
-      <workItem from="1608992765085" duration="4419000" />
+      <workItem from="1608992765085" duration="23776000" />
+      <workItem from="1609081039395" duration="44000" />
+      <workItem from="1609081085864" duration="26524000" />
+      <workItem from="1609173402540" duration="45186000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

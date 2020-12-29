@@ -15,3 +15,4 @@ RUN pip install psycopg2-binary
 EXPOSE 8000
 
 ADD ./app /www/
+ADD ./tests /www/tests
