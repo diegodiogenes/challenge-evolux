@@ -1,4 +1,4 @@
-from app.utils import db
+from app import db
 
 
 class Currency(db.Model):
@@ -14,7 +14,7 @@ class Currency(db.Model):
         self.money_sign = money_sign
 
     def __repr__(self):
-        return '<Currency {}>'.format(self.money_sign)
+        return '{}'.format(self.money_sign)
 
     @classmethod
     def get_by_id(cls, pk: int):

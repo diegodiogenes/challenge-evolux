@@ -1,4 +1,4 @@
-from app.utils import ma
+from app import ma
 from .models import User
 from marshmallow import fields, post_load
 

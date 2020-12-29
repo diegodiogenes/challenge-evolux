@@ -4,7 +4,6 @@ from base import TestFlaskBase
 class TestCurrency(TestFlaskBase):
 
     def test_create_currency(self):
-        self.create_user()
         token = self.create_token()
 
         currency = {
@@ -22,7 +21,6 @@ class TestCurrency(TestFlaskBase):
         self.assertEqual(response.json['moneySign'], expected['moneySign'])
 
     def test_invalid_payload_create_currency(self):
-        self.create_user()
         token = self.create_token()
 
         currency = {

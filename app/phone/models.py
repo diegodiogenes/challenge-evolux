@@ -1,4 +1,4 @@
-from app.utils import db
+from app import db
 
 
 class Phone(db.Model):
@@ -6,7 +6,7 @@ class Phone(db.Model):
     __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True, index=True)
-    value = db.Column(db.String)
+    value = db.Column(db.String, unique=True)
     monthy_price = db.Column(db.Numeric(8, 2))
     setup_price = db.Column(db.Numeric(8, 2))
     currency_id = db.Column(db.Integer, db.ForeignKey('currency.id'))

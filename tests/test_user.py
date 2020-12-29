@@ -31,7 +31,7 @@ class TestUser(TestFlaskBase):
         self.assertEqual(response.json, expected)
 
     def test_login_user(self):
-        self.test_create_user()
+        self.create_user()
         response = self.client.post('/user/login', json=self.user)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['user']['username'], self.user['username'])

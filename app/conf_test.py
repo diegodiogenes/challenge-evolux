@@ -4,9 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_jwt_extended import JWTManager
 
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite://"
+app.config['TESTING'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_SORT_KEYS'] = False
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'My precious')
@@ -16,6 +16,9 @@ JWTManager(app)
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
+from currency.models import Currency
+from phone.models import Phone
+from users.models import User
 from app.currency.views import currency_bp
 from phone.views import phone_bp
 from users.views import user_bp

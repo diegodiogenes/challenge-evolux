@@ -4,7 +4,7 @@ from marshmallow import ValidationError
 from .models import User
 from .serializer import UserSchema, LoginSchema
 from flask.views import MethodView
-from app.utils import db
+from app import db
 from flask_jwt_extended import create_access_token
 
 user_bp = Blueprint('user', __name__)

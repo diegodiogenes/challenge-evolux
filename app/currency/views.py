@@ -5,7 +5,7 @@ from marshmallow import ValidationError
 from .models import Currency
 from .serializer import CurrencySchema
 from flask.views import MethodView
-from app.utils import db
+from app import db
 
 currency_bp = Blueprint('currency', __name__)
 

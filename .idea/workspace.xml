@@ -2,23 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba288974-a515-473e-bdf6-592f53e473e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/currency/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/currency/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/currency/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/currency/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/load.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/phone/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/phone/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/phone/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_phone.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/currency/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/currency/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/currency/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/currency/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/currency/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/currency/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/database.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/phone/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/phone/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/phone/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/phone/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/phone/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/phone/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/users/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_currency.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_currency.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_phone.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_phone.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

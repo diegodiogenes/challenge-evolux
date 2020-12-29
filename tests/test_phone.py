@@ -3,14 +3,13 @@ from base import TestFlaskBase
 
 class TestPhone(TestFlaskBase):
     phone = {
-        "value": "+55 84 91232-4231",
+        "value": "+55 84 95232-4231",
         "monthyPrice": "0.03",
         "setupPrice": "3.40",
         "currency": "U$"
     }
 
     def test_create_phone(self):
-        self.create_user()
         self.create_currency()
         token = self.create_token()
 
@@ -27,7 +26,6 @@ class TestPhone(TestFlaskBase):
         self.assertEqual(response.json['monthyPrice'], expected['monthyPrice'])
 
     def test_invalid_payload_create_currency(self):
-        self.create_user()
         token = self.create_token()
 
         phone = {
@@ -48,7 +46,6 @@ class TestPhone(TestFlaskBase):
         self.assertEqual(response.json, expected)
 
     def test_invalid_payload_with_negative_numbers_create_currency(self):
-        self.create_user()
         token = self.create_token()
 
         phone = {

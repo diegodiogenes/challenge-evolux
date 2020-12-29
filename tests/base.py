@@ -1,18 +1,24 @@
 from json import loads
 from unittest import TestCase
-from app import create_app
+from app.conf_test import db, app_test
 from flask import url_for
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+from app import conf_test
 
 
 class TestFlaskBase(TestCase):
+
+    def create_app(self):
+        return app_test
+
     def setUp(self):
-        """Roda antes de todos os testes."""
-        self.app = create_app()
-        self.app.testing = True
-        self.app_context = self.app.test_request_context()
-        self.app_context.push()
+        """Setup Tests."""
+        self.app = self.create_app()
         self.client = self.app.test_client()
-        self.app.db.create_all()
+        db.create_all()
+
+        self.app.db = db
         self.user = {
             'username': 'test',
             'password': '1234'
@@ -24,8 +30,9 @@ class TestFlaskBase(TestCase):
         }
 
     def tearDown(self):
-        """Roda depois de todos os testes."""
-        self.app.db.drop_all()
+        """Drop database when tests finish."""
+        db.session.remove()
+        db.drop_all()
 
     def create_user(self):
         self.client.post('/user/', json=self.user)
