@@ -14,59 +14,71 @@ class PhoneView(MethodView):
 
     @jwt_required
     def get(self, pk: int = None, page=1):
-        if not pk:
-            phones_schema = PhoneSchema(many=True)
-            phones = Phone.query.paginate(page, 10).items
-            res = jsonify(phones_schema.dump(phones))
-        else:
-            phone = Phone.query.filter_by(id=pk).first()
-            if not phone:
-                return jsonify(error="DID not found with this ID"), 404
-            res = self.phone_schema.jsonify(phone)
-        return make_response(res, 200)
+        try:
+            if not pk:
+                phones_schema = PhoneSchema(many=True)
+                phones = Phone.query.paginate(page, 10).items
+                res = jsonify(phones_schema.dump(phones))
+            else:
+                phone = Phone.query.filter_by(id=pk).first()
+                if not phone:
+                    return jsonify(error="DID not found with this ID"), 404
+                res = self.phone_schema.jsonify(phone)
+            return make_response(res, 200)
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
     @jwt_required
     def post(self):
         try:
-            phone = self.phone_schema.load(request.json)
-        except ValidationError as err:
-            return jsonify(err.messages), 400
+            try:
+                phone = self.phone_schema.load(request.json)
+            except ValidationError as err:
+                return jsonify(err.messages), 400
 
-        current_app.db.session.add(phone)
-        current_app.db.session.commit()
-        return self.phone_schema.jsonify(phone), 201
+            current_app.db.session.add(phone)
+            current_app.db.session.commit()
+            return self.phone_schema.jsonify(phone), 201
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
     @jwt_required
     def put(self, pk: int = None):
-        phone = Phone.get_by_id(pk)
-        if not phone:
-            return jsonify(error="DID not found with this ID"), 404
-
         try:
-            obj = self.phone_schema.load(request.json)
-        except ValidationError as err:
-            return jsonify(err.messages), 400
+            phone = Phone.get_by_id(pk)
+            if not phone:
+                return jsonify(error="DID not found with this ID"), 404
 
-        delattr(obj, '_sa_instance_state')
+            try:
+                obj = self.phone_schema.load(request.json)
+            except ValidationError as err:
+                return jsonify(err.messages), 400
 
-        for key, value in obj.__dict__.items():
-            setattr(phone, key, value)
+            delattr(obj, '_sa_instance_state')
 
-        current_app.db.session.commit()
+            for key, value in obj.__dict__.items():
+                setattr(phone, key, value)
 
-        return self.phone_schema.dump(phone), 200
+            current_app.db.session.commit()
+
+            return self.phone_schema.dump(phone), 200
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
     @jwt_required
     def delete(self, pk: int = None):
-        phone = Phone.get_by_id(pk)
+        try:
+            phone = Phone.get_by_id(pk)
 
-        if not phone:
-            return jsonify(error="DID not found with this ID"), 404
+            if not phone:
+                return jsonify(error="DID not found with this ID"), 404
 
-        current_app.db.session.delete(phone)
-        current_app.db.session.commit()
+            current_app.db.session.delete(phone)
+            current_app.db.session.commit()
 
-        return jsonify(''), 204
+            return jsonify(''), 204
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
 
 phone_view = PhoneView.as_view('phone_view')

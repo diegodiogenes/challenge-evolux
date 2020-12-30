@@ -14,58 +14,70 @@ class CurrencyView(MethodView):
 
     @jwt_required
     def get(self, pk: int = None, page=1):
-        if not pk:
-            currencies_schema = CurrencySchema(many=True)
-            currencies = Currency.query.all()
-            res = jsonify(currencies_schema.dump(currencies))
-        else:
-            currency = Currency.get_by_id(pk)
-            if not currency:
-                return jsonify(error="Currency not found with this ID"), 404
-            res = self.currency_schema.jsonify(currency)
-        return res
+        try:
+            if not pk:
+                currencies_schema = CurrencySchema(many=True)
+                currencies = Currency.query.all()
+                res = jsonify(currencies_schema.dump(currencies))
+            else:
+                currency = Currency.get_by_id(pk)
+                if not currency:
+                    return jsonify(error="Currency not found with this ID"), 404
+                res = self.currency_schema.jsonify(currency)
+            return res
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
     @jwt_required
     def post(self):
         try:
-            currency = self.currency_schema.load(request.json)
-        except ValidationError as err:
-            return jsonify(err.messages), 400
-        current_app.db.session.add(currency)
-        current_app.db.session.commit()
-        return self.currency_schema.jsonify(currency), 201
+            try:
+                currency = self.currency_schema.load(request.json)
+            except ValidationError as err:
+                return jsonify(err.messages), 400
+            current_app.db.session.add(currency)
+            current_app.db.session.commit()
+            return self.currency_schema.jsonify(currency), 201
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
     @jwt_required
     def put(self, pk: int = None):
-        currency = Currency.get_by_id(pk)
-        if not currency:
-            return jsonify(error="Currency not found with this ID"), 404
-
         try:
-            obj = self.currency_schema.load(request.json)
-        except ValidationError as err:
-            return jsonify(err.messages), 400
+            currency = Currency.get_by_id(pk)
+            if not currency:
+                return jsonify(error="Currency not found with this ID"), 404
 
-        delattr(obj, '_sa_instance_state')
+            try:
+                obj = self.currency_schema.load(request.json)
+            except ValidationError as err:
+                return jsonify(err.messages), 400
 
-        for key, value in obj.__dict__.items():
-            setattr(currency, key, value)
+            delattr(obj, '_sa_instance_state')
 
-        current_app.db.session.commit()
+            for key, value in obj.__dict__.items():
+                setattr(currency, key, value)
 
-        return self.currency_schema.jsonify(currency), 200
+            current_app.db.session.commit()
+
+            return self.currency_schema.jsonify(currency), 200
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
     @jwt_required
     def delete(self, pk: int = None):
-        currency = Currency.get_by_id(pk)
+        try:
+            currency = Currency.get_by_id(pk)
 
-        if not currency:
-            return jsonify(error="Currency not found with this ID"), 404
+            if not currency:
+                return jsonify(error="Currency not found with this ID"), 404
 
-        current_app.db.session.delete(currency.first())
-        current_app.db.session.commit()
+            current_app.db.session.delete(currency.first())
+            current_app.db.session.commit()
 
-        return jsonify(''), 204
+            return jsonify(''), 204
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
 
 currency_view = CurrencyView.as_view('currency_view')

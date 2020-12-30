@@ -15,13 +15,16 @@ class UserView(MethodView):
 
     def post(self):
         try:
-            user = self.user_schema.load(request.json)
-        except ValidationError as err:
-            return jsonify(err.messages), 400
+            try:
+                user = self.user_schema.load(request.json)
+            except ValidationError as err:
+                return jsonify(err.messages), 400
 
-        current_app.db.session.add(user)
-        current_app.db.session.commit()
-        return self.user_schema.jsonify(user), 201
+            current_app.db.session.add(user)
+            current_app.db.session.commit()
+            return self.user_schema.jsonify(user), 201
+        except Exception:
+            return jsonify(error='An unexpected error has occurred, please try again'), 500
 
 
 @user_bp.route('/login', methods=['POST'])
