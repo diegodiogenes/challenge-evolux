@@ -1,6 +1,8 @@
 # challenge-evolux
 Repository for the [evolux challenge backend](https://github.com/EvoluxBR/back-end-test/blob/master/README.md)
 
+The DER of application can be found [here](https://github.com/diegodiogenes/challenge-evolux/blob/master/der.png)
+
 ## Setup
 
 For use this project, you should have installed [Docker](https://docs.docker.com/engine/install/) and [Docker Compose]
@@ -24,6 +26,8 @@ docker-compose -f docker-compose/development.yml run hercules-web ./init_config.
 ```
 
 ## Routes
+
+You can test this routes with Postman, just import the [environment](https://github.com/diegodiogenes/challenge-evolux/blob/master/Evolux.postman_collection.json)
 
 The application has these routes:
 - Auth
