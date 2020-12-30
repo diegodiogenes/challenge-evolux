@@ -1,8 +1,9 @@
 from base import TestFlaskBase
+import unittest
 
 
 class TestPhone(TestFlaskBase):
-    phone = {
+    payload = {
         "value": "+55 84 95232-4231",
         "monthyPrice": "0.03",
         "setupPrice": "3.40",
@@ -14,18 +15,57 @@ class TestPhone(TestFlaskBase):
         token = self.create_token()
 
         expected = {
-            "value": "+55 84 91232-4321",
+            "id": 1,
+            "value": "+55 84 95232-4231",
             "monthyPrice": "0.03",
             "setupPrice": "3.40",
             "currency": "U$"
         }
 
-        response = self.client.post('/phone/', json=self.phone, headers=token)
+        response = self.client.post('/phone/', json=self.payload, headers=token)
 
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json['monthyPrice'], expected['monthyPrice'])
+        self.assertEqual(response.json, expected)
 
-    def test_invalid_payload_create_currency(self):
+    def test_create_phone_with_not_currency_registered(self):
+        self.create_currency()
+        token = self.create_token()
+
+        payload = {
+            "value": "+55 84 95232-4231",
+            "monthyPrice": "0.03",
+            "setupPrice": "3.40",
+            "currency": "D$"
+        }
+
+        expected = {
+            "currency": [
+                "There is no currency with D$"
+            ]
+        }
+
+        response = self.client.post('/phone/', json=payload, headers=token)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json, expected)
+
+    def test_create_phone_with_same_value_phone_number(self):
+        self.create_phone()
+        token = self.create_token()
+
+        expected = {
+            "value": [
+                "DID with value +55 84 95232-4231 already exists"
+            ]
+        }
+
+        response = self.client.post('/phone/', json=self.phone, headers=token)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json, expected)
+
+    def test_invalid_payload_create_phone(self):
+        self.create_currency()
         token = self.create_token()
 
         phone = {
@@ -45,7 +85,8 @@ class TestPhone(TestFlaskBase):
 
         self.assertEqual(response.json, expected)
 
-    def test_invalid_payload_with_negative_numbers_create_currency(self):
+    def test_invalid_payload_with_negative_numbers_create_phone(self):
+        self.create_currency()
         token = self.create_token()
 
         phone = {
@@ -70,19 +111,21 @@ class TestPhone(TestFlaskBase):
         self.assertEqual(response.json, expected)
 
     def test_create_phone_without_credentials(self):
-        response = self.client.post('/phone/', json=self.phone)
+        response = self.client.post('/phone/', json=self.payload)
 
         self.assertEqual(response.status_code, 401)
 
     def test_get_phone(self):
+        self.create_phone()
         token = self.create_token()
 
         response = self.client.get('/phone/1', headers=token)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json['value'], self.phone['value'])
+        self.assertEqual(response.json['value'], self.payload['value'])
 
     def test_put_phone(self):
+        self.create_phone()
         token = self.create_token()
 
         phone = {
@@ -96,3 +139,15 @@ class TestPhone(TestFlaskBase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['value'], phone['value'])
+
+    def test_delete_phone(self):
+        self.create_phone()
+        token = self.create_token()
+
+        response = self.client.delete('/phone/1', headers=token)
+
+        self.assertEqual(response.status_code, 204)
+
+
+if __name__ == '__main__':
+    unittest.main()

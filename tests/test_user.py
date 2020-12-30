@@ -1,4 +1,5 @@
 from base import TestFlaskBase
+import unittest
 
 
 class TestUser(TestFlaskBase):
@@ -8,7 +9,6 @@ class TestUser(TestFlaskBase):
     }
 
     def test_create_user(self):
-
         assert_equal = {
             'id': '1',
             'username': 'test'
@@ -35,3 +35,7 @@ class TestUser(TestFlaskBase):
         response = self.client.post('/user/login', json=self.user)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['user']['username'], self.user['username'])
+
+
+if __name__ == '__main__':
+    unittest.main()

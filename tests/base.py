@@ -1,24 +1,18 @@
-from json import loads
 from unittest import TestCase
-from app.conf_test import db, app_test
-from flask import url_for
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-from app import conf_test
+from app import app, db
 
 
 class TestFlaskBase(TestCase):
 
-    def create_app(self):
-        return app_test
-
     def setUp(self):
         """Setup Tests."""
-        self.app = self.create_app()
-        self.client = self.app.test_client()
+        app.config.from_object('config.TestingConfig')
+        app_ctx = app.test_request_context()
+        app_ctx.push()
+        db.app = app
         db.create_all()
 
-        self.app.db = db
+        self.client = app.test_client()
         self.user = {
             'username': 'test',
             'password': '1234'
@@ -29,10 +23,16 @@ class TestFlaskBase(TestCase):
             'moneySign': 'U$'
         }
 
+        self.phone = {
+            "value": "+55 84 95232-4231",
+            "monthyPrice": "0.03",
+            "setupPrice": "3.40",
+            "currency": "U$"
+        }
+
     def tearDown(self):
         """Drop database when tests finish."""
-        db.session.remove()
-        db.drop_all()
+        db.drop_all(app=app)
 
     def create_user(self):
         self.client.post('/user/', json=self.user)
@@ -45,5 +45,12 @@ class TestFlaskBase(TestCase):
         }
 
     def create_currency(self):
+        self.create_user()
         token = self.create_token()
         self.client.post('/currency/', json=self.currency, headers=token)
+
+    def create_phone(self):
+        self.create_user()
+        self.create_currency()
+        token = self.create_token()
+        self.client.post('/phone/', json=self.phone, headers=token)
