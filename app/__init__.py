@@ -6,10 +6,7 @@ from flask_jwt_extended import JWTManager
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JSON_SORT_KEYS'] = False
-app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'My precious')
+app.config.from_object('config.BaseConfig')
 
 JWTManager(app)
 

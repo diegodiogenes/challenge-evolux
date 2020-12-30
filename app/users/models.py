@@ -5,6 +5,7 @@ from passlib.hash import pbkdf2_sha256
 
 class User(db.Model):
     __tablename__ = "user"
+    __table_args__ = {'useexisting': True}
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), nullable=False)

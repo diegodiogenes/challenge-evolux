@@ -3,7 +3,7 @@ from app import db
 
 class Phone(db.Model):
     __tablename__ = "Phone"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {'useexisting': True}
 
     id = db.Column(db.Integer, primary_key=True, index=True)
     value = db.Column(db.String, unique=True)

@@ -7,7 +7,8 @@ from .models import Phone
 class PhoneSchema(ma.SQLAlchemySchema):
     id = fields.Integer()
     value = fields.Str(required=True,
-                       validate=validate.Regexp(regex='^(\+\d{1,2}\s)?\d{2,3}?[\s.-]\d{3,5}[\s.-]\d{4}$'))
+                       validate=validate.Regexp(regex='^(\+\d{1,2}\s)?\d{2,3}?[\s.-]\d{3,5}[\s.-]\d{4}$',
+                                                error="Please, enter with a valid phone number."))
     monthy_price = fields.Decimal(required=True, as_string=True, data_key="monthyPrice",
                                   validate=[validate.Range(min=0, error="Value must be greater than 0")])
     setup_price = fields.Decimal(required=True, as_string=True, data_key="setupPrice",
@@ -21,13 +22,6 @@ class PhoneSchema(ma.SQLAlchemySchema):
         load_instance = True
         ordered = True
         dump_only = ['currency.money_sign', 'id']
-
-    # @pre_load
-    # def set_currency(self, in_data: dict, many, **kwargs):
-    #     currency = Currency.query.filter_by(money_sign=in_data['currency']).first_or_404(
-    #         description='There is no data with {}'.format(in_data['currency']))
-    #     in_data['currency'] = {'money_sign': currency.money_sign, 'name': currency.name}
-    #     return in_data
 
     @validates('currency')
     def validate_currency(self, value: dict):

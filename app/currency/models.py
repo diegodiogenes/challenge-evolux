@@ -3,7 +3,7 @@ from app import db
 
 class Currency(db.Model):
     __tablename__ = "currency"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {'useexisting': True}
 
     id = db.Column(db.Integer, primary_key=True, index=True)
     name = db.Column(db.String, index=True)
