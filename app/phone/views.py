@@ -5,7 +5,6 @@ from marshmallow import ValidationError
 from .models import Phone
 from .serializer import PhoneSchema
 from flask.views import MethodView
-from app import db
 
 phone_bp = Blueprint('phone', __name__)
 

@@ -5,7 +5,6 @@ from marshmallow import ValidationError
 from .models import Currency
 from .serializer import CurrencySchema
 from flask.views import MethodView
-from app import db
 
 currency_bp = Blueprint('currency', __name__)
 
@@ -20,7 +19,7 @@ class CurrencyView(MethodView):
             currencies = Currency.query.all()
             res = jsonify(currencies_schema.dump(currencies))
         else:
-            currency = Currency.query.filter_by(id=pk).first()
+            currency = Currency.get_by_id(pk)
             if not currency:
                 return jsonify(error="Currency not found with this ID"), 404
             res = self.currency_schema.jsonify(currency)
@@ -47,10 +46,14 @@ class CurrencyView(MethodView):
         except ValidationError as err:
             return jsonify(err.messages), 400
 
-        currency.update(obj)
+        delattr(obj, '_sa_instance_state')
+
+        for key, value in obj.__dict__.items():
+            setattr(currency, key, value)
+
         current_app.db.session.commit()
 
-        return self.currency_schema.jsonify(currency.first()), 200
+        return self.currency_schema.jsonify(currency), 200
 
     @jwt_required
     def delete(self, pk: int = None):

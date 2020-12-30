@@ -18,4 +18,4 @@ class Currency(db.Model):
 
     @classmethod
     def get_by_id(cls, pk: int):
-        return Currency.query.filter_by(id=pk)
+        return Currency.query.filter_by(id=pk).first()
